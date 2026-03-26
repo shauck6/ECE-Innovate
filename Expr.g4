@@ -8,8 +8,7 @@ stat:   expr NEWLINE
     |   NEWLINE                   
     ;
 
-expr:   expr ('*'|'/') expr   
-    |   expr ('+'|'-') expr   
+expr:   expr ('+'|'-') expr   
     |   INT                    
     |   ID                    
     |   '(' expr ')'         
