@@ -4,8 +4,7 @@ grammar Expr;
 prog:   stat+ ; 
 
 stat:   expr NEWLINE                
-    |   ID '=' expr NEWLINE        
-    |   NEWLINE                   
+    |   ID '=' expr NEWLINE                           
     ;
 
 expr:   expr ('+'|'-') expr   
