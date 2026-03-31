@@ -1,10 +1,10 @@
-#include "VProcessor.h"
+#include "VSamProcessor.h"
 #include "verilated.h"
 #include <iostream>
 
 int main(int argc, char** argv) {
     Verilated::commandArgs(argc, argv);
-    VProcessor* top = new VProcessor;
+    VSamProcessor* top = new VSamProcessor;
     int line = 0;
     std::cout << "Processor Running... " << std::endl;
     for (int i = 0; i < 100; i++) {

@@ -21,16 +21,16 @@ public class Main {
     public static void main(String[] args) throws Exception {
         
         // 1. Read source code from a file.
-        CharStream input = CharStreams.fromPath(Path.of("correct.expr"));
+        CharStream input = CharStreams.fromPath(Path.of("correct.Sam"));
 
         // 2. Lex it
         counterErrorListener listener = new counterErrorListener();
-        ExprLexer lexer = new ExprLexer(input);
+        SamLexer lexer = new SamLexer(input);
         lexer.addErrorListener(listener);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
 
         // 3. Parse it
-        ExprParser parser = new ExprParser(tokens);
+        SamParser parser = new SamParser(tokens);
         ParseTree tree = parser.prog();
 
         //int lexerErrors  = lexer.getNumberOfErrors();
@@ -38,7 +38,7 @@ public class Main {
 
         // 4. Run your visitor on it if there are no errors
         if (parserErrors == 0 && listener.count == 0) {
-            SamVisitor visitor = new SamVisitor();
+            MySamGenerator visitor = new MySamGenerator();
             visitor.visit(tree);
             writeToFile("program.mem", visitor.instList);
         }

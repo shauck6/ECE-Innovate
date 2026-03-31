@@ -7,19 +7,19 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 
-public class SamVisitor extends ExprBaseVisitor<Integer> {
+public class MySamGenerator extends SamBaseVisitor<Integer> {
     public List<Integer> instList = new ArrayList<>();
     private Map<String, Integer> variableRegisters = new HashMap<>();
     int regCounter = 0;
     @Override
-    public Integer visitProg(ExprParser.ProgContext ctx) {
+    public Integer visitProg(SamParser.ProgContext ctx) {
         int numLines = ctx.getChildCount();
         // System.out.println(numLines);
         return visitChildren(ctx);
     }
 
     @Override
-    public Integer visitStat(ExprParser.StatContext ctx) {
+    public Integer visitStat(SamParser.StatContext ctx) {
         // System.out.print("Stat: " + ctx.getText());
         int numChild = ctx.getChildCount();
         if (ctx.ID() != null) {
@@ -42,7 +42,7 @@ public class SamVisitor extends ExprBaseVisitor<Integer> {
     }
 
     @Override
-    public Integer visitExpr(ExprParser.ExprContext ctx) {
+    public Integer visitExpr(SamParser.ExprContext ctx) {
         //if (ctx.getText() != "\n" && ctx.getText() != "\r")System.out.println("Expr: " + ctx.getText());
         // int numChild = ctx.getChildCount();
         // System.out.println("Here: " + ctx.getText());

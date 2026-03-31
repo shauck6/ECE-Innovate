@@ -1,4 +1,4 @@
-sim_main.o: ../sim_main.cpp VProcessor.h \
+sim_main.o: ../sim_main.cpp VSamProcessor.h \
  /usr/share/verilator/include/verilated.h \
  /usr/share/verilator/include/verilatedos.h \
  /usr/share/verilator/include/verilated_config.h \
