@@ -1,10 +1,10 @@
 # ECE-Innovate
-ECE Innovate Thread Challenge (Systems Architecture)
+ECE Innovate Thread Challenge is a challenge hosted by the Georgia Tech ECE department to create a project based on a chosen thread (course concentration). The goal is to build a project that a second year could resonably do to give hands on examples for the threads so that young students can more quickly find their desired thread combination. For my submission I have chosen to focus on my Systems Architecture thread which explores the full system of how a computer works from the hardware level all the way to the applications that run on it.
 
 # Project Summary:
 For this project I have created a simple language, a compiler to take a file in that language and output a machine code file, to then run on a processor that I created. I have decided to call these the SAM language and the SAM Processor. SAM stands for Simple And Manageable because I set out to make this project to display how easy it can be to implement a programming language, as well as a processor to complete whatever tasks you require.
 
-## Language Specifics:
+## Language Specifics
 The language I created is an offshoot of a basic language that has no functions or branches, it is simply a files where each line is a statement containing one or more expressions. I changed the language a little to simplify it so that it only accepts addition as an opertation. So each statement can either be an assigning statement with a variable on the left, or some series of expressions which could include variables or numbers, addition, and also has parentheses. I wanted to keep the language this simple to show the very basics as grammars and languages get complicated quickly. I also wanted to leave it in a state where it would be easy to add other features like subtraction.
 
 ## ANTLR Lexer and Parser
