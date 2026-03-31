@@ -14,17 +14,18 @@ class alignas(VL_CACHE_LINE_BYTES) VProcessor___024root final : public Verilated
   public:
 
     // DESIGN SPECIFIC STATE
-    CData/*0:0*/ __VstlFirstIteration;
-    CData/*0:0*/ __VicoFirstIteration;
+    VL_IN8(clk,0,0);
+    VL_OUT8(out_valid,0,0);
+    CData/*7:0*/ Processor__DOT__pc;
+    CData/*0:0*/ __Vtrigprevexpr___TOP__clk__0;
     CData/*0:0*/ __VactContinue;
-    VL_IN(x,31,0);
-    VL_IN(y,31,0);
     VL_OUT(z,31,0);
+    IData/*31:0*/ Processor__DOT__inst;
     IData/*31:0*/ __VactIterCount;
-    VlTriggerVec<1> __VstlTriggered;
-    VlTriggerVec<1> __VicoTriggered;
-    VlTriggerVec<0> __VactTriggered;
-    VlTriggerVec<0> __VnbaTriggered;
+    VlUnpacked<IData/*31:0*/, 512> Processor__DOT__regs;
+    VlUnpacked<IData/*31:0*/, 256> Processor__DOT__memory;
+    VlTriggerVec<1> __VactTriggered;
+    VlTriggerVec<1> __VnbaTriggered;
 
     // INTERNAL VARIABLES
     VProcessor__Syms* const vlSymsp;

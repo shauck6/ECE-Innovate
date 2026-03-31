@@ -85,8 +85,8 @@ public class SamVisitor extends ExprBaseVisitor<Integer> {
         int newInst = 0x60000000;
         value &= 0x3FFF;
         newInst += value;
-        destReg &= 0x3FFF;
-        newInst += destReg << 14;
+        destReg &= 0x1FF;
+        newInst += destReg << 18;
         return newInst;
     }
 
@@ -100,14 +100,14 @@ public class SamVisitor extends ExprBaseVisitor<Integer> {
     }
 
     private int buildOutput(int sourceReg) {
-        return 0x10000000 + (sourceReg << 14);
+        return 0x10000000 + (sourceReg << 18);
     }
 
     private int buildMove(int destReg, int sourceReg) {
         int newInst = 0xF0000000;
-        destReg &= 0x3FFF;
-        newInst += (destReg << 14);
-        sourceReg &= 0x3FFF;
+        destReg &= 0x1FF;
+        newInst += (destReg << 18);
+        sourceReg &= 0x1FF;
         newInst += sourceReg;
         return newInst;
     }

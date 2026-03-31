@@ -51,6 +51,7 @@ public class Main {
             // Write each instruction as an 8 digit hex value, one per line
             lines.add(String.format("%08x", instr));
         }
+        lines.add(String.format("%08x", 0x00000000));
         Files.write(Path.of(filename), lines);
     }
 }

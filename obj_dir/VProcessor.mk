@@ -4,7 +4,7 @@
 # Execute this makefile from the object directory:
 #    make -f VProcessor.mk
 
-default: libVProcessor
+default: VProcessor
 
 ### Constants...
 # Perl executable (from $PERL)
@@ -41,9 +41,11 @@ VM_USER_LDLIBS = \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
+	sim_main \
 
 # User .cpp directories (from .cpp's on Verilator command line)
 VM_USER_DIR = \
+	. \
 
 
 ### Default rules...
@@ -52,9 +54,15 @@ include VProcessor_classes.mk
 # Include global rules
 include $(VERILATOR_ROOT)/include/verilated.mk
 
-### Library rules (default lib mode)
-libVProcessor.a: $(VK_OBJS) $(VK_USER_OBJS) $(VM_HIER_LIBS)
-libverilated.a: $(VK_GLOBAL_OBJS)
-libVProcessor: libVProcessor.a libverilated.a $(VM_PREFIX)__ALL.a
+### Executable rules... (from --exe)
+VPATH += $(VM_USER_DIR)
+
+sim_main.o: sim_main.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+
+### Link rules... (from --exe)
+VProcessor: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
+	$(LINK) $(LDFLAGS) $^ $(LOADLIBES) $(LDLIBS) $(LIBS) $(SC_LIBS) -o $@
+
 
 # Verilated -*- Makefile -*-

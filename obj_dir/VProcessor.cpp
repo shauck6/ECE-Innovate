@@ -9,8 +9,8 @@
 VProcessor::VProcessor(VerilatedContext* _vcontextp__, const char* _vcname__)
     : VerilatedModel{*_vcontextp__}
     , vlSymsp{new VProcessor__Syms(contextp(), _vcname__, this)}
-    , x{vlSymsp->TOP.x}
-    , y{vlSymsp->TOP.y}
+    , clk{vlSymsp->TOP.clk}
+    , out_valid{vlSymsp->TOP.out_valid}
     , z{vlSymsp->TOP.z}
     , rootp{&(vlSymsp->TOP)}
 {

@@ -5,51 +5,122 @@
 #include "VProcessor__pch.h"
 #include "VProcessor___024root.h"
 
-VL_INLINE_OPT void VProcessor___024root___ico_sequent__TOP__0(VProcessor___024root* vlSelf) {
-    if (false && vlSelf) {}  // Prevent unused
-    VProcessor__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    VProcessor___024root___ico_sequent__TOP__0\n"); );
-    // Body
-    vlSelf->z = (vlSelf->x + vlSelf->y);
-}
-
-void VProcessor___024root___eval_ico(VProcessor___024root* vlSelf) {
-    if (false && vlSelf) {}  // Prevent unused
-    VProcessor__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    VProcessor___024root___eval_ico\n"); );
-    // Body
-    if ((1ULL & vlSelf->__VicoTriggered.word(0U))) {
-        VProcessor___024root___ico_sequent__TOP__0(vlSelf);
-    }
-}
-
-void VProcessor___024root___eval_triggers__ico(VProcessor___024root* vlSelf);
-
-bool VProcessor___024root___eval_phase__ico(VProcessor___024root* vlSelf) {
-    if (false && vlSelf) {}  // Prevent unused
-    VProcessor__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    VProcessor___024root___eval_phase__ico\n"); );
-    // Init
-    CData/*0:0*/ __VicoExecute;
-    // Body
-    VProcessor___024root___eval_triggers__ico(vlSelf);
-    __VicoExecute = vlSelf->__VicoTriggered.any();
-    if (__VicoExecute) {
-        VProcessor___024root___eval_ico(vlSelf);
-    }
-    return (__VicoExecute);
-}
-
 void VProcessor___024root___eval_act(VProcessor___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     VProcessor__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    VProcessor___024root___eval_act\n"); );
 }
 
+VL_INLINE_OPT void VProcessor___024root___nba_sequent__TOP__0(VProcessor___024root* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    VProcessor__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    VProcessor___024root___nba_sequent__TOP__0\n"); );
+    // Init
+    CData/*7:0*/ __Vdly__Processor__DOT__pc;
+    __Vdly__Processor__DOT__pc = 0;
+    SData/*8:0*/ __Vdlyvdim0__Processor__DOT__regs__v0;
+    __Vdlyvdim0__Processor__DOT__regs__v0 = 0;
+    IData/*31:0*/ __Vdlyvval__Processor__DOT__regs__v0;
+    __Vdlyvval__Processor__DOT__regs__v0 = 0;
+    CData/*0:0*/ __Vdlyvset__Processor__DOT__regs__v0;
+    __Vdlyvset__Processor__DOT__regs__v0 = 0;
+    SData/*8:0*/ __Vdlyvdim0__Processor__DOT__regs__v1;
+    __Vdlyvdim0__Processor__DOT__regs__v1 = 0;
+    IData/*31:0*/ __Vdlyvval__Processor__DOT__regs__v1;
+    __Vdlyvval__Processor__DOT__regs__v1 = 0;
+    CData/*0:0*/ __Vdlyvset__Processor__DOT__regs__v1;
+    __Vdlyvset__Processor__DOT__regs__v1 = 0;
+    SData/*8:0*/ __Vdlyvdim0__Processor__DOT__regs__v2;
+    __Vdlyvdim0__Processor__DOT__regs__v2 = 0;
+    IData/*31:0*/ __Vdlyvval__Processor__DOT__regs__v2;
+    __Vdlyvval__Processor__DOT__regs__v2 = 0;
+    CData/*0:0*/ __Vdlyvset__Processor__DOT__regs__v2;
+    __Vdlyvset__Processor__DOT__regs__v2 = 0;
+    // Body
+    __Vdly__Processor__DOT__pc = vlSelf->Processor__DOT__pc;
+    __Vdlyvset__Processor__DOT__regs__v0 = 0U;
+    __Vdlyvset__Processor__DOT__regs__v1 = 0U;
+    __Vdlyvset__Processor__DOT__regs__v2 = 0U;
+    vlSelf->out_valid = 0U;
+    if ((6U != (vlSelf->Processor__DOT__inst >> 0x1cU))) {
+        if ((0xfU != (vlSelf->Processor__DOT__inst 
+                      >> 0x1cU))) {
+            if ((3U != (vlSelf->Processor__DOT__inst 
+                        >> 0x1cU))) {
+                if ((1U != (vlSelf->Processor__DOT__inst 
+                            >> 0x1cU))) {
+                    __Vdly__Processor__DOT__pc = (0xffU 
+                                                  & ((IData)(vlSelf->Processor__DOT__pc) 
+                                                     - (IData)(1U)));
+                }
+                if ((1U == (vlSelf->Processor__DOT__inst 
+                            >> 0x1cU))) {
+                    vlSelf->out_valid = 1U;
+                }
+            }
+        }
+    }
+    if ((6U == (vlSelf->Processor__DOT__inst >> 0x1cU))) {
+        __Vdlyvval__Processor__DOT__regs__v0 = (0x3fffU 
+                                                & vlSelf->Processor__DOT__inst);
+        __Vdlyvset__Processor__DOT__regs__v0 = 1U;
+        __Vdlyvdim0__Processor__DOT__regs__v0 = (0x1ffU 
+                                                 & (vlSelf->Processor__DOT__inst 
+                                                    >> 0x12U));
+    } else if ((0xfU == (vlSelf->Processor__DOT__inst 
+                         >> 0x1cU))) {
+        __Vdlyvval__Processor__DOT__regs__v1 = vlSelf->Processor__DOT__regs
+            [(0x1ffU & vlSelf->Processor__DOT__inst)];
+        __Vdlyvset__Processor__DOT__regs__v1 = 1U;
+        __Vdlyvdim0__Processor__DOT__regs__v1 = (0x1ffU 
+                                                 & (vlSelf->Processor__DOT__inst 
+                                                    >> 0x12U));
+    } else if ((3U == (vlSelf->Processor__DOT__inst 
+                       >> 0x1cU))) {
+        __Vdlyvval__Processor__DOT__regs__v2 = (vlSelf->Processor__DOT__regs
+                                                [(0x1ffU 
+                                                  & vlSelf->Processor__DOT__inst)] 
+                                                + vlSelf->Processor__DOT__regs
+                                                [(0x1ffU 
+                                                  & (vlSelf->Processor__DOT__inst 
+                                                     >> 9U))]);
+        __Vdlyvset__Processor__DOT__regs__v2 = 1U;
+        __Vdlyvdim0__Processor__DOT__regs__v2 = (0x1ffU 
+                                                 & (vlSelf->Processor__DOT__inst 
+                                                    >> 0x12U));
+    } else if ((1U == (vlSelf->Processor__DOT__inst 
+                       >> 0x1cU))) {
+        vlSelf->z = vlSelf->Processor__DOT__regs[(0x1ffU 
+                                                  & (vlSelf->Processor__DOT__inst 
+                                                     >> 0x12U))];
+    }
+    if (__Vdlyvset__Processor__DOT__regs__v0) {
+        vlSelf->Processor__DOT__regs[__Vdlyvdim0__Processor__DOT__regs__v0] 
+            = __Vdlyvval__Processor__DOT__regs__v0;
+    }
+    if (__Vdlyvset__Processor__DOT__regs__v1) {
+        vlSelf->Processor__DOT__regs[__Vdlyvdim0__Processor__DOT__regs__v1] 
+            = __Vdlyvval__Processor__DOT__regs__v1;
+    }
+    if (__Vdlyvset__Processor__DOT__regs__v2) {
+        vlSelf->Processor__DOT__regs[__Vdlyvdim0__Processor__DOT__regs__v2] 
+            = __Vdlyvval__Processor__DOT__regs__v2;
+    }
+    vlSelf->Processor__DOT__inst = vlSelf->Processor__DOT__memory
+        [vlSelf->Processor__DOT__pc];
+    __Vdly__Processor__DOT__pc = (0xffU & ((IData)(1U) 
+                                           + (IData)(vlSelf->Processor__DOT__pc)));
+    vlSelf->Processor__DOT__pc = __Vdly__Processor__DOT__pc;
+}
+
 void VProcessor___024root___eval_nba(VProcessor___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     VProcessor__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    VProcessor___024root___eval_nba\n"); );
+    // Body
+    if ((1ULL & vlSelf->__VnbaTriggered.word(0U))) {
+        VProcessor___024root___nba_sequent__TOP__0(vlSelf);
+    }
 }
 
 void VProcessor___024root___eval_triggers__act(VProcessor___024root* vlSelf);
@@ -59,7 +130,7 @@ bool VProcessor___024root___eval_phase__act(VProcessor___024root* vlSelf) {
     VProcessor__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    VProcessor___024root___eval_phase__act\n"); );
     // Init
-    VlTriggerVec<0> __VpreTriggered;
+    VlTriggerVec<1> __VpreTriggered;
     CData/*0:0*/ __VactExecute;
     // Body
     VProcessor___024root___eval_triggers__act(vlSelf);
@@ -88,9 +159,6 @@ bool VProcessor___024root___eval_phase__nba(VProcessor___024root* vlSelf) {
 }
 
 #ifdef VL_DEBUG
-VL_ATTR_COLD void VProcessor___024root___dump_triggers__ico(VProcessor___024root* vlSelf);
-#endif  // VL_DEBUG
-#ifdef VL_DEBUG
 VL_ATTR_COLD void VProcessor___024root___dump_triggers__nba(VProcessor___024root* vlSelf);
 #endif  // VL_DEBUG
 #ifdef VL_DEBUG
@@ -102,28 +170,9 @@ void VProcessor___024root___eval(VProcessor___024root* vlSelf) {
     VProcessor__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    VProcessor___024root___eval\n"); );
     // Init
-    IData/*31:0*/ __VicoIterCount;
-    CData/*0:0*/ __VicoContinue;
     IData/*31:0*/ __VnbaIterCount;
     CData/*0:0*/ __VnbaContinue;
     // Body
-    __VicoIterCount = 0U;
-    vlSelf->__VicoFirstIteration = 1U;
-    __VicoContinue = 1U;
-    while (__VicoContinue) {
-        if (VL_UNLIKELY((0x64U < __VicoIterCount))) {
-#ifdef VL_DEBUG
-            VProcessor___024root___dump_triggers__ico(vlSelf);
-#endif
-            VL_FATAL_MT("Processor.v", 1, "", "Input combinational region did not converge.");
-        }
-        __VicoIterCount = ((IData)(1U) + __VicoIterCount);
-        __VicoContinue = 0U;
-        if (VProcessor___024root___eval_phase__ico(vlSelf)) {
-            __VicoContinue = 1U;
-        }
-        vlSelf->__VicoFirstIteration = 0U;
-    }
     __VnbaIterCount = 0U;
     __VnbaContinue = 1U;
     while (__VnbaContinue) {
@@ -131,7 +180,7 @@ void VProcessor___024root___eval(VProcessor___024root* vlSelf) {
 #ifdef VL_DEBUG
             VProcessor___024root___dump_triggers__nba(vlSelf);
 #endif
-            VL_FATAL_MT("Processor.v", 1, "", "NBA region did not converge.");
+            VL_FATAL_MT("Processor.v", 6, "", "NBA region did not converge.");
         }
         __VnbaIterCount = ((IData)(1U) + __VnbaIterCount);
         __VnbaContinue = 0U;
@@ -142,7 +191,7 @@ void VProcessor___024root___eval(VProcessor___024root* vlSelf) {
 #ifdef VL_DEBUG
                 VProcessor___024root___dump_triggers__act(vlSelf);
 #endif
-                VL_FATAL_MT("Processor.v", 1, "", "Active region did not converge.");
+                VL_FATAL_MT("Processor.v", 6, "", "Active region did not converge.");
             }
             vlSelf->__VactIterCount = ((IData)(1U) 
                                        + vlSelf->__VactIterCount);
@@ -162,5 +211,8 @@ void VProcessor___024root___eval_debug_assertions(VProcessor___024root* vlSelf) 
     if (false && vlSelf) {}  // Prevent unused
     VProcessor__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    VProcessor___024root___eval_debug_assertions\n"); );
+    // Body
+    if (VL_UNLIKELY((vlSelf->clk & 0xfeU))) {
+        Verilated::overWidthError("clk");}
 }
 #endif  // VL_DEBUG
