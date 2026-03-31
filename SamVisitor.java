@@ -1,38 +1,114 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
-public class SamVisitor extends ExprBaseVisitor<String> {
+
+public class SamVisitor extends ExprBaseVisitor<Integer> {
     public List<Integer> instList = new ArrayList<>();
+    private Map<String, Integer> variableRegisters = new HashMap<>();
+    int regCounter = 0;
     @Override
-    public String visitProg(ExprParser.ProgContext ctx) {
-        System.out.println("Prog:");
+    public Integer visitProg(ExprParser.ProgContext ctx) {
+        int numLines = ctx.getChildCount();
+        // System.out.println(numLines);
         return visitChildren(ctx);
     }
 
     @Override
-    public String visitStat(ExprParser.StatContext ctx) {
-        System.out.print("Stat: " + ctx.getText());
-        // int numChild = ctx.getChildCount();
-        // for (int i = 0; i < numChild - 1; i++) {
-        //     System.out.print("Child: " + ctx.getChild(i).getText() + "\t");
-        // }
-        // System.out.println();
-        return visitChildren(ctx);
-    }
-
-    @Override
-    public String visitExpr(ExprParser.ExprContext ctx) {
-        System.out.println("Expr: " + ctx.getText());
+    public Integer visitStat(ExprParser.StatContext ctx) {
+        // System.out.print("Stat: " + ctx.getText());
         int numChild = ctx.getChildCount();
-        System.out.print("Child count: " + numChild + "\t");
-        for (int i = 0; i < numChild; i++) {
-            if (ctx.getChild(i).getText().equals("("))
-                System.out.print("Child: " + ctx.getChild(i).getText() + "\t");
+        if (ctx.ID() != null) {
+
+            String varName = ctx.getText().split("=")[0];
+            // System.out.println("VarName: " + varName);
+            Integer sourceReg = visit(ctx.expr());
+            // System.out.println("ResultReg: R" + resultReg);
+            
+            int destReg = regCounter++;
+            int newInst = buildMove(destReg, sourceReg);
+            instList.add(newInst);
+            variableRegisters.put(varName, destReg);
+            instList.add(buildOutput(destReg));
+            return destReg;
         }
-        System.out.println();
-        return visitChildren(ctx);
+        int destReg = visit(ctx.expr());
+        instList.add(buildOutput(destReg));
+        return destReg;
+    }
+
+    @Override
+    public Integer visitExpr(ExprParser.ExprContext ctx) {
+        //if (ctx.getText() != "\n" && ctx.getText() != "\r")System.out.println("Expr: " + ctx.getText());
+        // int numChild = ctx.getChildCount();
+        // System.out.println("Here: " + ctx.getText());
+        if (ctx.INT() != null) {
+
+            int value = Integer.parseInt(ctx.getText());
+            int destReg  = regCounter++;
+            int newInst = buildLoadI(destReg, value);
+            // System.out.println("NewLoad: " + value + " Into: R" + destReg);
+            instList.add(newInst);
+            return destReg;
+        }
+
+        if (ctx.ID() != null) {
+            String value = (ctx.getText());
+            return variableRegisters.get(value);
+        }
+
+        if (ctx.PLUS() != null) {
+            // System.out.println("Left: " + ctx.expr(0).getText());
+            int leftReg  = (visit(ctx.expr(0)));
+            // System.out.println("Right: " + ctx.expr(1).getText());  
+            int rightReg = (visit(ctx.expr(1)));  
+            int destReg  = regCounter++;
+            // System.out.println("ADD R" + destReg + ", R" + leftReg + ", R" + rightReg);
+            int newInst = buildAdd(destReg, rightReg, leftReg);
+            instList.add(newInst);
+            return destReg;
+        }
+        // System.out.println(ctx.getText() + "Here");
+        if (ctx.getText().charAt(0) == '(') {
+            // System.out.println("List of contexts: " + ctx.expr(0).getText());
+            return visit(ctx.expr(0));
+        }
+        
+        return -1;
+    }
+
+    private int buildLoadI(int destReg, int value) {
+        int newInst = 0x60000000;
+        value &= 0x3FFF;
+        newInst += value;
+        destReg &= 0x3FFF;
+        newInst += destReg << 14;
+        return newInst;
+    }
+
+    private int buildAdd(int destReg, int sourceReg1, int sourceReg2) {
+        int newInst = 0x30000000;
+        sourceReg1 &= 0x1FF;
+        sourceReg2 &= 0x1FF;
+        destReg &= 0x1FF;
+        newInst += ((destReg << 18) + (sourceReg1 << 9) + sourceReg2);
+        return newInst;
+    }
+
+    private int buildOutput(int sourceReg) {
+        return 0x10000000 + (sourceReg << 14);
+    }
+
+    private int buildMove(int destReg, int sourceReg) {
+        int newInst = 0xF0000000;
+        destReg &= 0x3FFF;
+        newInst += (destReg << 14);
+        sourceReg &= 0x3FFF;
+        newInst += sourceReg;
+        return newInst;
     }
 }

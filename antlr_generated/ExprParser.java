@@ -16,7 +16,7 @@ public class ExprParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, ID=6, INT=7, NEWLINE=8, WS=9;
+		T__0=1, T__1=2, ID=3, INT=4, NEWLINE=5, WS=6, PLUS=7, EQUAL=8;
 	public static final int
 		RULE_prog = 0, RULE_stat = 1, RULE_expr = 2;
 	private static String[] makeRuleNames() {
@@ -28,13 +28,13 @@ public class ExprParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'='", "'+'", "'-'", "'('", "')'"
+			null, "'('", "')'", null, null, null, null, "'+'", "'='"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, null, null, null, "ID", "INT", "NEWLINE", "WS"
+			null, null, null, "ID", "INT", "NEWLINE", "WS", "PLUS", "EQUAL"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -135,7 +135,7 @@ public class ExprParser extends Parser {
 				setState(9); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 208L) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 26L) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -156,6 +156,7 @@ public class ExprParser extends Parser {
 		}
 		public TerminalNode NEWLINE() { return getToken(ExprParser.NEWLINE, 0); }
 		public TerminalNode ID() { return getToken(ExprParser.ID, 0); }
+		public TerminalNode EQUAL() { return getToken(ExprParser.EQUAL, 0); }
 		public StatContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -197,7 +198,7 @@ public class ExprParser extends Parser {
 				setState(14);
 				match(ID);
 				setState(15);
-				match(T__0);
+				match(EQUAL);
 				setState(16);
 				expr(0);
 				setState(17);
@@ -227,6 +228,7 @@ public class ExprParser extends Parser {
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
+		public TerminalNode PLUS() { return getToken(ExprParser.PLUS, 0); }
 		public ExprContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -257,7 +259,6 @@ public class ExprParser extends Parser {
 		ExprContext _prevctx = _localctx;
 		int _startState = 4;
 		enterRecursionRule(_localctx, 4, RULE_expr, _p);
-		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
@@ -277,14 +278,14 @@ public class ExprParser extends Parser {
 				match(ID);
 				}
 				break;
-			case T__3:
+			case T__0:
 				{
 				setState(24);
-				match(T__3);
+				match(T__0);
 				setState(25);
 				expr(0);
 				setState(26);
-				match(T__4);
+				match(T__1);
 				}
 				break;
 			default:
@@ -305,15 +306,7 @@ public class ExprParser extends Parser {
 					setState(30);
 					if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
 					setState(31);
-					_la = _input.LA(1);
-					if ( !(_la==T__1 || _la==T__2) ) {
-					_errHandler.recoverInline(this);
-					}
-					else {
-						if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-						_errHandler.reportMatch(this);
-						consume();
-					}
+					match(PLUS);
 					setState(32);
 					expr(5);
 					}
@@ -352,33 +345,32 @@ public class ExprParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\t\'\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\b\'\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0001\u0000\u0004\u0000\b\b\u0000\u000b\u0000\f\u0000"+
 		"\t\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
 		"\u0001\u0001\u0001\u0001\u0003\u0001\u0014\b\u0001\u0001\u0002\u0001\u0002"+
 		"\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0003\u0002"+
 		"\u001d\b\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0005\u0002\"\b\u0002"+
 		"\n\u0002\f\u0002%\t\u0002\u0001\u0002\u0000\u0001\u0004\u0003\u0000\u0002"+
-		"\u0004\u0000\u0001\u0001\u0000\u0002\u0003(\u0000\u0007\u0001\u0000\u0000"+
-		"\u0000\u0002\u0013\u0001\u0000\u0000\u0000\u0004\u001c\u0001\u0000\u0000"+
-		"\u0000\u0006\b\u0003\u0002\u0001\u0000\u0007\u0006\u0001\u0000\u0000\u0000"+
-		"\b\t\u0001\u0000\u0000\u0000\t\u0007\u0001\u0000\u0000\u0000\t\n\u0001"+
-		"\u0000\u0000\u0000\n\u0001\u0001\u0000\u0000\u0000\u000b\f\u0003\u0004"+
-		"\u0002\u0000\f\r\u0005\b\u0000\u0000\r\u0014\u0001\u0000\u0000\u0000\u000e"+
-		"\u000f\u0005\u0006\u0000\u0000\u000f\u0010\u0005\u0001\u0000\u0000\u0010"+
-		"\u0011\u0003\u0004\u0002\u0000\u0011\u0012\u0005\b\u0000\u0000\u0012\u0014"+
-		"\u0001\u0000\u0000\u0000\u0013\u000b\u0001\u0000\u0000\u0000\u0013\u000e"+
-		"\u0001\u0000\u0000\u0000\u0014\u0003\u0001\u0000\u0000\u0000\u0015\u0016"+
-		"\u0006\u0002\uffff\uffff\u0000\u0016\u001d\u0005\u0007\u0000\u0000\u0017"+
-		"\u001d\u0005\u0006\u0000\u0000\u0018\u0019\u0005\u0004\u0000\u0000\u0019"+
-		"\u001a\u0003\u0004\u0002\u0000\u001a\u001b\u0005\u0005\u0000\u0000\u001b"+
-		"\u001d\u0001\u0000\u0000\u0000\u001c\u0015\u0001\u0000\u0000\u0000\u001c"+
-		"\u0017\u0001\u0000\u0000\u0000\u001c\u0018\u0001\u0000\u0000\u0000\u001d"+
-		"#\u0001\u0000\u0000\u0000\u001e\u001f\n\u0004\u0000\u0000\u001f \u0007"+
-		"\u0000\u0000\u0000 \"\u0003\u0004\u0002\u0005!\u001e\u0001\u0000\u0000"+
-		"\u0000\"%\u0001\u0000\u0000\u0000#!\u0001\u0000\u0000\u0000#$\u0001\u0000"+
-		"\u0000\u0000$\u0005\u0001\u0000\u0000\u0000%#\u0001\u0000\u0000\u0000"+
-		"\u0004\t\u0013\u001c#";
+		"\u0004\u0000\u0000(\u0000\u0007\u0001\u0000\u0000\u0000\u0002\u0013\u0001"+
+		"\u0000\u0000\u0000\u0004\u001c\u0001\u0000\u0000\u0000\u0006\b\u0003\u0002"+
+		"\u0001\u0000\u0007\u0006\u0001\u0000\u0000\u0000\b\t\u0001\u0000\u0000"+
+		"\u0000\t\u0007\u0001\u0000\u0000\u0000\t\n\u0001\u0000\u0000\u0000\n\u0001"+
+		"\u0001\u0000\u0000\u0000\u000b\f\u0003\u0004\u0002\u0000\f\r\u0005\u0005"+
+		"\u0000\u0000\r\u0014\u0001\u0000\u0000\u0000\u000e\u000f\u0005\u0003\u0000"+
+		"\u0000\u000f\u0010\u0005\b\u0000\u0000\u0010\u0011\u0003\u0004\u0002\u0000"+
+		"\u0011\u0012\u0005\u0005\u0000\u0000\u0012\u0014\u0001\u0000\u0000\u0000"+
+		"\u0013\u000b\u0001\u0000\u0000\u0000\u0013\u000e\u0001\u0000\u0000\u0000"+
+		"\u0014\u0003\u0001\u0000\u0000\u0000\u0015\u0016\u0006\u0002\uffff\uffff"+
+		"\u0000\u0016\u001d\u0005\u0004\u0000\u0000\u0017\u001d\u0005\u0003\u0000"+
+		"\u0000\u0018\u0019\u0005\u0001\u0000\u0000\u0019\u001a\u0003\u0004\u0002"+
+		"\u0000\u001a\u001b\u0005\u0002\u0000\u0000\u001b\u001d\u0001\u0000\u0000"+
+		"\u0000\u001c\u0015\u0001\u0000\u0000\u0000\u001c\u0017\u0001\u0000\u0000"+
+		"\u0000\u001c\u0018\u0001\u0000\u0000\u0000\u001d#\u0001\u0000\u0000\u0000"+
+		"\u001e\u001f\n\u0004\u0000\u0000\u001f \u0005\u0007\u0000\u0000 \"\u0003"+
+		"\u0004\u0002\u0005!\u001e\u0001\u0000\u0000\u0000\"%\u0001\u0000\u0000"+
+		"\u0000#!\u0001\u0000\u0000\u0000#$\u0001\u0000\u0000\u0000$\u0005\u0001"+
+		"\u0000\u0000\u0000%#\u0001\u0000\u0000\u0000\u0004\t\u0013\u001c#";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

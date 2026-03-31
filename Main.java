@@ -1,4 +1,8 @@
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
@@ -36,7 +40,17 @@ public class Main {
         if (parserErrors == 0 && listener.count == 0) {
             SamVisitor visitor = new SamVisitor();
             visitor.visit(tree);
-            System.out.println(visitor.instList.isEmpty());
+            writeToFile("program.mem", visitor.instList);
         }
+    }
+
+
+    public static void writeToFile(String filename, List<Integer> instructions) throws IOException {
+        List<String> lines = new ArrayList<>();
+        for (int instr : instructions) {
+            // Write each instruction as an 8 digit hex value, one per line
+            lines.add(String.format("%08x", instr));
+        }
+        Files.write(Path.of(filename), lines);
     }
 }
